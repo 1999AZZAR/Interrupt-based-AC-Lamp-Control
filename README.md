@@ -1,22 +1,29 @@
-<h1>Pengaturan Kecerahan Lampu AC</h1>
+# AC Light Control with PWM and MQTT
 
-<p>Program ini mengontrol kecerahan lampu AC dengan menggunakan interrupt dan modulasi lebar pulsa (PWM). Interrupt digunakan untuk menjalankan sebuah fungsi saat ada perubahan pada pin digital tertentu. PWM merupakan teknik yang digunakan untuk mengubah kecerahan lampu dengan mengirimkan pulsa-pulsa elektrik yang teratur ke lampu.</p>
+This program controls the brightness of an AC light using pulse width modulation (PWM) and an MQTT connection. The potentiometer is used to adjust the brightness of the light.
 
-<h2>Pengaturan</h2>
+## Hardware
+- Arduino board
+- AC light
+- Potentiometer
+- MQTT server (e.g. Adafruit IO)
 
-<ol>
-  <li>Hubungkan lampu AC ke pin digital 11 pada Arduino.</li>
-  <li>Hubungkan potentiometer ke pin analog A0 pada Arduino.</li>
-</ol>
+## Libraries
+- Adafruit MQTT
+- Adafruit MQTT Client
 
-<h2>Fungsi</h2>
+## Setup
+1. Connect your Arduino board to your computer.
+2. Upload the sketch to your Arduino board.
+3. Connect the AC light to pin 11 on the Arduino board.
+4. Connect the potentiometer to pin A0 on the Arduino board.
+5. Connect the Arduino board to your Wi-Fi network.
+6. Connect to the MQTT server and subscribe to the "light" feed.
+7. Use the potentiometer to adjust the brightness of the light.
+8. Use the "light" feed to adjust the brightness of the light remotely.
 
-<h3><code>setup()</code></h3>
+Note: 
+- Make sure to replace the WiFi's credentials (ssid and password) with the ones that corresponds to your wifi network.
+- Also make sure to replace the credentials (username, key, server and serverport) with the ones that corresponds to your adaruit.io account.
 
-<p>Dalam fungsi <code>setup()</code>, lampu ditetapkan sebagai output dan interrupt terpasang ke pin digital 2. Fungsi interrupt disebut <code>zero_cross()</code>.</p>
-
-<h3><code>zero_cross()</code></h3>
-<p>Fungsi <code>zero_cross()</code> dipanggil setiap kali terjadi perubahan pada pin digital 2. Di dalam fungsi, variabel <code>dimming_time</code> dihitung menggunakan nilai dari variabel <code>dim_val</code>. Kemudian, lampu dinyalakan selama waktu singkat dan kemudian dimatikan lagi. Panjang waktu lampu menyala ditentukan oleh variabel <code>dimming_time</code>, yang mengontrol kecerahan lampu. Nilai <code>dimming_time</code> dihitung dengan mengalikan nilai <code>dim_val</code> dengan 200.</p>
-<h3><code>loop()</code></h3>
-<p>Dalam fungsi <code>loop()</code>, nilai dari potentiometer dibaca dari pin analog A0 dan dipetakan ke rentang 10 hingga 49 menggunakan fungsi <code>map()</code>. Nilai ini kemudian diberikan ke variabel <code>dim_val</code>, yang digunakan dalam fungsi <code>zero_cross()</code> untuk mengontrol kecerahan lampu.</p>
-<p>Proses ini terus diulang secara terus-menerus oleh fungsi <code>loop()</code>, sehingga kecerahan lampu dapat diubah dengan memutar potentiometer.</p>
+This code uses an interrupt service routine (ISR) to detect zero crossing and then turn on the light for a certain duration, determined by the dimming value. The dimming value can be set either by reading the potentiometer value or by getting the value from the MQTT feed. The dimming value is also published to the "light_value" feed so that it can be read by other devices connected to the same MQTT server.
