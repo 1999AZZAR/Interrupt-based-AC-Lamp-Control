@@ -1,22 +1,78 @@
-<h1>Pengaturan Kecerahan Lampu AC</h1>
+# AC Lamp Brightness Control using Interrupt and PWM
 
-<p>Program ini mengontrol kecerahan lampu AC dengan menggunakan interrupt dan modulasi lebar pulsa (PWM). Interrupt digunakan untuk menjalankan sebuah fungsi saat ada perubahan pada pin digital tertentu. PWM merupakan teknik yang digunakan untuk mengubah kecerahan lampu dengan mengirimkan pulsa-pulsa elektrik yang teratur ke lampu.</p>
+This program controls the brightness of an AC lamp using interrupt and pulse width modulation (PWM) techniques. A potentiometer is used to adjust the lamp brightness.
 
-<h2>Pengaturan</h2>
+## Code Description
 
-<ol>
-  <li>Hubungkan lampu AC ke pin digital 11 pada Arduino.</li>
-  <li>Hubungkan potentiometer ke pin analog A0 pada Arduino.</li>
-</ol>
+The code is written in C/C++ and can be uploaded to an Arduino or similar microcontroller. It consists of three major functions: `setup()`, `zero_cross()`, and `loop()`.
 
-<h2>Fungsi</h2>
+### Function Descriptions
 
-<h3><code>setup()</code></h3>
+1. `setup()`: This function is executed once when the program starts. It performs the following tasks:
+   - Sets the lamp pin (`LAMP`) as an output.
+   - Attaches an interrupt to digital pin 2 using `attachInterrupt()`.
 
-<p>Dalam fungsi <code>setup()</code>, lampu ditetapkan sebagai output dan interrupt terpasang ke pin digital 2. Fungsi interrupt disebut <code>zero_cross()</code>.</p>
+2. `zero_cross()`: This function is called whenever there is a change on digital pin 2. It performs the following tasks:
+   - Calculates the dimming time for the lamp based on the current `dim_val` value.
+   - Delays for the calculated dimming time using `delayMicroseconds()`.
+   - Turns on the lamp for a brief period using `digitalWrite(LAMP, HIGH)` and `delayMicroseconds()`.
+   - Turns off the lamp using `digitalWrite(LAMP, LOW)`.
 
-<h3><code>zero_cross()</code></h3>
-<p>Fungsi <code>zero_cross()</code> dipanggil setiap kali terjadi perubahan pada pin digital 2. Di dalam fungsi, variabel <code>dimming_time</code> dihitung menggunakan nilai dari variabel <code>dim_val</code>. Kemudian, lampu dinyalakan selama waktu singkat dan kemudian dimatikan lagi. Panjang waktu lampu menyala ditentukan oleh variabel <code>dimming_time</code>, yang mengontrol kecerahan lampu. Nilai <code>dimming_time</code> dihitung dengan mengalikan nilai <code>dim_val</code> dengan 200.</p>
-<h3><code>loop()</code></h3>
-<p>Dalam fungsi <code>loop()</code>, nilai dari potentiometer dibaca dari pin analog A0 dan dipetakan ke rentang 10 hingga 49 menggunakan fungsi <code>map()</code>. Nilai ini kemudian diberikan ke variabel <code>dim_val</code>, yang digunakan dalam fungsi <code>zero_cross()</code> untuk mengontrol kecerahan lampu.</p>
-<p>Proses ini terus diulang secara terus-menerus oleh fungsi <code>loop()</code>, sehingga kecerahan lampu dapat diubah dengan memutar potentiometer.</p>
+3. `loop()`: This function runs continuously after the `setup()` function. It performs the following tasks:
+   - Reads the value from a potentiometer using `analogRead(A0)`.
+   - Maps the potentiometer value to a range between 10 and 49 using `map()`.
+   - Updates the `dim_val` variable with the mapped value.
+
+### Hardware Requirements
+
+- AC lamp
+- Microcontroller board (e.g., Arduino)
+- Potentiometer
+- Connecting wires
+
+## Flowchart
+
+The flowchart below illustrates the flow of control and the sequence of actions performed in the code.
+
+```mermaid
+graph LR
+A[Start] --> B[Setup]
+B --> C[Attach Interrupt]
+C --> D[Read Potentiometer]
+D --> E[Map Potentiometer Value]
+E --> F[Update dim_val]
+F --> G[Loop]
+G --> H[Calculate dimming_time]
+H --> I[Delay]
+I --> J[Turn on Lamp]
+J --> K[Delay]
+K --> L[Turn off Lamp]
+L --> G
+```
+
+The flowchart demonstrates how the program initializes, reads the potentiometer value, calculates the dimming time, and controls the lamp's brightness using interrupt and PWM techniques.
+
+## Usage
+
+To use this code, follow these steps:
+
+1. Connect the AC lamp to the microcontroller's output pin (`LAMP`).
+2. Connect a potentiometer to the microcontroller's analog input pin (`A0`).
+3. Upload the code to the microcontroller.
+4. Observe the changes in the lamp's brightness as you adjust the potentiometer.
+
+## Contributing
+
+Contributions to this project are welcome. You can fork the repository, make improvements, and submit a pull request.
+
+## License
+
+This code is released under the [MIT License](LICENSE).
+
+Feel free to use, modify, and distribute this code for personal and commercial purposes.
+
+## Acknowledgements
+
+Special thanks to the Arduino community for their support and resources.
+
+If you find this code helpful, please give it a star!
