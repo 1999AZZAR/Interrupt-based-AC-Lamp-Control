@@ -1,5 +1,7 @@
 # AC Lamp Brightness Control using Interrupt and PWM
 
+[![CodeFactor](https://www.codefactor.io/repository/github/1999azzar/interrupt-based-ac-lamp-control/badge)](https://www.codefactor.io/repository/github/1999azzar/interrupt-based-ac-lamp-control)
+
 This program controls the brightness of an AC lamp using interrupt and pulse width modulation (PWM) techniques. A potentiometer is used to adjust the lamp brightness.
 
 ## Code Description
