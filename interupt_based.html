@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Lamp Brightness Control using Interrupt and PWM</title>
+    <link rel="icon" type="image/x-icon" href="web/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://1999azzar.github.io/gpt-advance-prompt/web/style/style.css">
+</head>
+<body>
+    <h1 id="ac-lamp-brightness-control-using-interrupt-and-pwm">AC Lamp Brightness Control using Interrupt and PWM</h1>
+    
+    <p>
+        <a href="https://www.codefactor.io/repository/github/1999azzar/interrupt-based-ac-lamp-control">
+            <img src="https://www.codefactor.io/repository/github/1999azzar/interrupt-based-ac-lamp-control/badge" alt="CodeFactor">
+        </a>
+    </p>
+    
+    <p>This program controls the brightness of an AC lamp using interrupt and pulse width modulation (PWM) techniques. A potentiometer is used to adjust the lamp brightness.</p>
+    
+    <h2 id="code-description">Code Description</h2>
+    
+    <p>The code is written in C/C++ and can be uploaded to an Arduino or similar microcontroller. It consists of three major functions: <code>setup()</code>, <code>zero_cross()</code>, and <code>loop()</code>.</p>
+    
+    <h3 id="function-descriptions">Function Descriptions</h3>
+    
+    <ol>
+        <li>
+            <p><code>setup()</code>: This function is executed once when the program starts. It performs the following tasks:</p>
+            <ul>
+                <li>Sets the lamp pin (<code>LAMP</code>) as an output.</li>
+                <li>Attaches an interrupt to digital pin 2 using <code>attachInterrupt()</code>.</li>
+            </ul>
+        </li>
+        <li>
+            <p><code>zero_cross()</code>: This function is called whenever there is a change on digital pin 2. It performs the following tasks:</p>
+            <ul>
+                <li>Calculates the dimming time for the lamp based on the current <code>dim_val</code> value.</li>
+                <li>Delays for the calculated dimming time using <code>delayMicroseconds()</code>.</li>
+                <li>Turns on the lamp for a brief period using <code>digitalWrite(LAMP, HIGH)</code> and <code>delayMicroseconds()</code>.</li>
+                <li>Turns off the lamp using <code>digitalWrite(LAMP, LOW)</code>.</li>
+            </ul>
+        </li>
+        <li>
+            <p><code>loop()</code>: This function runs continuously after the <code>setup()</code> function. It performs the following tasks:</p>
+            <ul>
+                <li>Reads the value from a potentiometer using <code>analogRead(A0)</code>.</li>
+                <li>Maps the potentiometer value to a range between 10 and 49 using <code>map()</code>.</li>
+                <li>Updates the <code>dim_val</code> variable with the mapped value.</li>
+            </ul>
+        </li>
+    </ol>
+    
+    <h3 id="hardware-requirements">Hardware Requirements</h3>
+    
+    <ul>
+        <li>AC lamp</li>
+        <li>Microcontroller board (e.g., Arduino)</li>
+        <li>Potentiometer</li>
+        <li>Connecting wires</li>
+    </ul>
+    
+    <h2 id="flowchart">Flowchart</h2>
+    
+    <p>The flowchart below illustrates the flow of control and the sequence of actions performed in the code.</p>
+
+    <pre class="mermaid">
+        graph LR
+        A[Start] --> B[Setup]
+        B --> C[Attach Interrupt]
+        C --> D[Read Potentiometer]
+        D --> E[Map Potentiometer Value]
+        E --> F[Update dim_val]
+        F --> G[Loop]
+        G --> H[Calculate dimming_time]
+        H --> I[Delay]
+        I --> J[Turn on Lamp]
+        J --> K[Delay]
+        K --> L[Turn off Lamp]
+        L --> G
+    </pre>
+    
+    <p>The flowchart demonstrates how the program initializes, reads the potentiometer value, calculates the dimming time, and controls the lamp's brightness using interrupt and PWM techniques.</p>
+    
+    <h2 id="usage">Usage</h2>
+    
+    <p>To use this code, follow these steps:</p>
+    
+    <ol>
+        <li>Connect the AC lamp to the microcontroller's output pin (<code>LAMP</code>).</li>
+        <li>Connect a potentiometer to the microcontroller's analog input pin (<code>A0</code>).</li>
+        <li>Upload the code to the microcontroller.</li>
+        <li>Observe the changes in the lamp's brightness as you adjust the potentiometer.</li>
+    </ol>
+    
+    <h2 id="contributing">Contributing</h2>
+    
+    <p>Contributions to this project are welcome. You can fork the repository, make improvements, and submit a pull request.</p>
+    
+    <h2 id="license">License</h2>
+    
+    <p>This code is released under the <a href="LICENSE">MIT License</a>.</p>
+    
+    <p>Feel free to use, modify, and distribute this code for personal and commercial purposes.</p>
+    
+    <h2 id="acknowledgements">Acknowledgements</h2>
+    
+    <p>Special thanks to the Arduino community for their support and resources.</p>
+    
+    <p>If you find this code helpful, please give it a star!</p>
+    
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    </script>
+</body>
+</html>
