@@ -78,3 +78,14 @@ Feel free to use, modify, and distribute this code for personal and commercial p
 Special thanks to the Arduino community for their support and resources.
 
 If you find this code helpful, please give it a star!
+
+## Support
+
+You can support me by buy me a coffee if u like to.
+
+<div align="left">
+<!--   <h4>And you can also support me by <a href="https://www.buymeacoffee.com/azzar" target="_blank">buying me coffee</a></h4> -->
+  <a href="https://www.buymeacoffee.com/azzar" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 42px !important;width: 151.9px !important; margin-top: 50px !important;">
+  </a>
+</div>
